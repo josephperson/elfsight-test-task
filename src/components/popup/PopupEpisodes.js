@@ -5,12 +5,13 @@ import { Loader, Text } from '../common';
 
 const API_EPISODES_URL = 'https://rickandmortyapi.com/api/episode';
 
-export function PopupEpisodes({ episodes }) {
+export function PopupEpisodes({ episodes = [] }) {
   const [series, setSeries] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    if (!episodes?.length) {
+    if (!episodes.length) {
       return;
     }
 
@@ -28,11 +29,20 @@ export function PopupEpisodes({ episodes }) {
         }
 
         setIsFetching(false);
-      });
+      })
+      .catch((error) => {
+        setIsError(true);
+        console.error(error);
+      })
+      .finally(() => setIsFetching(false));
   }, [episodes]);
 
   if (isFetching) {
     return <Loader />;
+  }
+
+  if (isError) {
+    return <Text>Failed to load episodes.</Text>;
   }
 
   return (
