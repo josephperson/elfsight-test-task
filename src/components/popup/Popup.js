@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { PopupEpisodes } from './PopupEpisodes';
 import { PopupHeader } from './PopupHeader';
 import { PopupInfo } from './PopupInfo';
+import { useEffect } from 'react';
 
 export function Popup({ settings: { visible, content = {} }, setSettings }) {
   const {
@@ -26,6 +27,14 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
       visible: !prevState.visible
     }));
   }
+
+  useEffect(() => {
+    document.body.style.overflow = visible ? 'hidden' : '';
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [visible]);
 
   return (
     <PopupContainer visible={visible}>
