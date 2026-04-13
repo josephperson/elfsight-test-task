@@ -39,6 +39,16 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
     };
   }, [visible]);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') closePopup();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [closePopup]);
+
   return (
     <PopupContainer visible={visible} onClick={handleBackdropClick}>
       <StyledPopup>
