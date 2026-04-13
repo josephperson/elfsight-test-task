@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { PopupEpisodes } from './PopupEpisodes';
 import { PopupHeader } from './PopupHeader';
 import { PopupInfo } from './PopupInfo';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 export function Popup({ settings: { visible, content = {} }, setSettings }) {
   const {
@@ -17,16 +17,19 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
     episode: episodes
   } = content;
 
-  function togglePopup(e) {
-    if (e.currentTarget !== e.target) {
-      return;
-    }
-
+  const closePopup = useCallback(() => {
     setSettings((prevState) => ({
       ...prevState,
-      visible: !prevState.visible
+      visible: false
     }));
-  }
+  }, [setSettings]);
+
+  const handleBackdropClick = useCallback(
+    (e) => {
+      if (e.target === e.currentTarget) closePopup();
+    },
+    [closePopup]
+  );
 
   useEffect(() => {
     document.body.style.overflow = visible ? 'hidden' : '';
@@ -37,9 +40,9 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
   }, [visible]);
 
   return (
-    <PopupContainer visible={visible}>
+    <PopupContainer visible={visible} onClick={handleBackdropClick}>
       <StyledPopup>
-        <CloseIcon onClick={togglePopup} />
+        <CloseIcon onClick={closePopup} />
 
         <PopupHeader
           name={name}
