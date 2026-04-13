@@ -50,7 +50,7 @@ export function PopupEpisodes({ episodes = [] }) {
       <Text>Participated in episodes:</Text>
 
       <StyledPopupEpisodes _length={series.length}>
-        {series?.map(({ id, name, episode }) => (
+        {series.map(({ id, name, episode }) => (
           <Episode key={id} _length={series.length}>
             <EpisodeMarking>
               {episode
@@ -77,10 +77,7 @@ const StyledPopupEpisodes = styled.div`
       display: grid;
       grid-auto-flow: column;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(
-        ${window.screen.width < 600 ? _length : Math.ceil(_length / 2)},
-        1fr
-      );
+      grid-template-rows: repeat(${Math.ceil(_length / 2)}, 1fr);
 
       & p {
         width: 95%;
@@ -88,11 +85,18 @@ const StyledPopupEpisodes = styled.div`
       }
 
       & span {
-        margin-bottom: ${window.screen.width < 600 ? '10px' : 0};
+        margin-bottom: 0;
+      }
+
+      @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(${_length}, 1fr);
+
+        & span {
+          margin-bottom: 10px;
+        }
       }
     `};
-
-  ${window.screen.width < 600 && 'grid-template-columns: 1fr'};
 `;
 
 const Episode = styled.p`
