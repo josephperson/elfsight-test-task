@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export function CardStatus({ status, species, type, className }) {
   return (
     <CardStatusContainer className={className}>
-      <StyledCardStatus status={status}>{status}</StyledCardStatus>
+      <StyledCardStatus _status={status}>{status}</StyledCardStatus>
       &nbsp;-&nbsp;
       <CardSpecies>{species}</CardSpecies>
       {type && <CardType>{type}</CardType>}
@@ -28,8 +28,8 @@ const StyledCardStatus = styled.span`
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background-color: ${({ status }) => {
-      switch (status) {
+    background-color: ${({ _status }) => {
+      switch (_status) {
         case 'Alive':
           return '#83bf46';
         case 'Dead':

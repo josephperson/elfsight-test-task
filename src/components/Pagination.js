@@ -57,7 +57,7 @@ export function Pagination() {
         </>
       )}
 
-      <Page active>{activePage + 1}</Page>
+      <Page _active>{activePage + 1}</Page>
 
       {pages[activePage + 1] && (
         <>
@@ -86,7 +86,7 @@ const Page = styled.span`
   padding: 5px;
   cursor: pointer;
   transition: color 0.2s;
-  ${({ active }) => active && 'color: #83bf46'};
+  ${({ _active }) => _active && 'color: #83bf46'};
 
   &:hover {
     color: #83bf46;

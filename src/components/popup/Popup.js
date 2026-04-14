@@ -50,7 +50,7 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
   }, [closePopup]);
 
   return (
-    <PopupContainer visible={visible} onClick={handleBackdropClick}>
+    <PopupContainer _visible={visible} onClick={handleBackdropClick}>
       <StyledPopup>
         <CloseIcon onClick={closePopup} />
 
@@ -85,8 +85,8 @@ const PopupContainer = styled.div`
   pointer-events: none;
   transition: opacity 0.3s, visible 0.3s;
 
-  ${({ visible }) =>
-    visible &&
+  ${({ _visible }) =>
+    _visible &&
     css`
       opacity: 1;
       visibility: initial;
