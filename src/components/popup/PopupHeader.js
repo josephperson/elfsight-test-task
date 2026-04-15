@@ -4,7 +4,7 @@ import { CardStatus, CardTitle } from '../card';
 export function PopupHeader({ image, name, gender, status, species, type }) {
   return (
     <PopupHeaderContainer>
-      <PopupImage src={image?.replace('../', '')} alt={name} />
+      <PopupImage src={image} alt={name} />
       <PopupTitle name={name} gender={gender} />
       <PopupStatus status={status} species={species} type={type} />
     </PopupHeaderContainer>
