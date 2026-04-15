@@ -8,7 +8,7 @@ import {
   useState
 } from 'react';
 
-const API_URL = 'https://rickandmortyapi.com/api/character/';
+const API_URL = 'https://rickandmortyapi.com/api/character';
 
 const DataContext = createContext({});
 
@@ -20,7 +20,7 @@ export function DataProvider({ children }) {
   const [info, setInfo] = useState({});
   const [apiURL, setApiURL] = useState(API_URL);
 
-  const fetchData = useCallback(async (url) => {
+  const fetchData = useCallback((url) => {
     setIsFetching(true);
     setIsError(false);
 
