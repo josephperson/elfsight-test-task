@@ -15,6 +15,7 @@ export function PopupEpisodes({ episodes = [] }) {
       return;
     }
 
+    setSeries([]);
     setIsFetching(true);
 
     const episodesIds = episodes.map((ep) => ep.match(/\d+$/)[0]);
