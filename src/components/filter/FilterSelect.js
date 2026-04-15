@@ -100,7 +100,10 @@ const FilterSelectContainer = styled.div`
 const SelectField = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 12px 16px;
+  align-items: center;
+  height: 40px;
+  padding: 0 16px;
+  gap: 8px;
   background: ${({ _isOpen }) => (_isOpen ? '#334466' : '#263750')};
   border: 1px solid #83bf46;
   border-radius: 8px;
@@ -113,7 +116,12 @@ const SelectField = styled.div`
   }
 `;
 
-const SelectValue = styled.span``;
+const SelectValue = styled.span`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+`;
 
 const SelectIcon = styled.span`
   width: 16px;
@@ -139,7 +147,7 @@ const SelectContent = styled.div`
   right: 0;
   display: flex;
   flex-direction: column;
-  max-height: 200px;
+  max-height: calc(5 * 40px);
   background: #ffffff;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
@@ -150,8 +158,12 @@ const SelectContent = styled.div`
 `;
 
 const StyledSelectItem = styled.div`
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
   width: 100%;
-  padding: 10px 8px;
+  height: 40px;
+  padding: 0 8px;
   font-weight: ${({ _isSelected }) => (_isSelected ? 600 : 400)};
   transition: background 0.2s;
 
